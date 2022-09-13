@@ -1,9 +1,21 @@
-# NativeBase Expo Template
+# [📱](https://emojiterra.com/pt/telefone/)Shopping Mobile
 
-The official NativeBase template for [Expo](https://docs.expo.io/)
+### Sobre
 
-## Usage
+Esse projeto conste em um **app** mobile de venda de produtos naturais.
 
-```sh
-expo init my-app --template @native-base/expo-template
+### Instale as dependênciasExecutand
+
+```
+yarn
+#ou
+npm install
+```
+
+### Executando
+
+```
+yarn start
+#ou
+npm start
 ```
