@@ -9,9 +9,64 @@ import {
     Link,
     Text,
     VStack,
+    Alert,
 } from "native-base";
 
+import { api } from "../../servers/api";
+
+import { useState } from "react";
+
 export const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [status, setStatus] = useState(<></>);
+
+    const handleSubmit = async () => {
+        if (email !== "" && password !== "") {
+            const data = {
+                email: email,
+                password: password,
+            };
+            try {
+                const token = await api.post("/user/login", data);
+            } catch (error) {
+                const response = error.response.data.data;
+                setStatus(
+                    <Alert
+                        maxW="400"
+                        marginTop={2}
+                        status="error"
+                        colorScheme="info"
+                    >
+                        <Text
+                            fontSize="sm"
+                            fontWeight="medium"
+                            color="coolGray.700"
+                        >
+                            {response}
+                        </Text>
+                    </Alert>
+                );
+            }
+        } else {
+            setStatus(
+                <Alert
+                    maxW="400"
+                    marginTop={2}
+                    status="warning"
+                    colorScheme="info"
+                >
+                    <Text
+                        fontSize="sm"
+                        fontWeight="medium"
+                        color="coolGray.700"
+                    >
+                        Todos os campos são obrigatórios!
+                    </Text>
+                </Alert>
+            );
+        }
+    };
     return (
         <>
             <Box
@@ -61,11 +116,21 @@ export const Login = () => {
                         <VStack space={3} mt="5">
                             <FormControl>
                                 <FormControl.Label>Email</FormControl.Label>
-                                <Input />
+                                <Input
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
                             </FormControl>
                             <FormControl>
                                 <FormControl.Label>Senha</FormControl.Label>
-                                <Input type="password" />
+                                <Input
+                                    value={password}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                    type="password"
+                                />
+                                {status}
                                 <Link
                                     _text={{
                                         fontSize: "xs",
@@ -77,17 +142,20 @@ export const Login = () => {
                                 >
                                     Esqueceu a senha?
                                 </Link>
+                                <Button
+                                    onPress={() => {
+                                        handleSubmit();
+                                    }}
+                                    bg="primary.700"
+                                    _hover={{
+                                        bg: "primary.600",
+                                    }}
+                                    mt="2"
+                                    colorScheme="primary"
+                                >
+                                    Entrar
+                                </Button>
                             </FormControl>
-                            <Button
-                                bg="primary.700"
-                                _hover={{
-                                    bg: "primary.600",
-                                }}
-                                mt="2"
-                                colorScheme="primary"
-                            >
-                                Entrar
-                            </Button>
                             <HStack mt="6" justifyContent="center">
                                 <Text
                                     fontSize="sm"
