@@ -1,31 +1,35 @@
+import { MaterialIcons } from "@expo/vector-icons";
 import {
+    Alert,
     Box,
     Button,
     Center,
     FormControl,
     Heading,
     HStack,
+    Icon,
     Input,
     Link,
+    Pressable,
     Text,
     VStack,
-    Alert,
 } from "native-base";
+import { useEffect, useState } from "react";
 import { api } from "../../servers/api";
-import { storeData, getData } from "../../servers/storage";
-import { useState,useEffect } from "react";
+import { getData, storeData } from "../../servers/storage";
 
 export const Login = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [status, setStatus] = useState(<></>);
+    const [show, setShow] = useState(false);
 
-    useEffect(async() => {
-        const token = await getData("@token")
-        if (token!==undefined) {
+    useEffect(async () => {
+        const token = await getData("@token");
+        if (token !== undefined) {
             navigation.navigate("Loja");
         }
-      });
+    });
 
     const handleSubmit = async () => {
         if (email !== "" && password !== "") {
@@ -58,12 +62,7 @@ export const Login = ({ navigation }) => {
             }
         } else {
             setStatus(
-                <Alert
-                    maxW="400"
-                    marginTop={2}
-                    status="warning"
-                    colorScheme="info"
-                >
+                <Alert maxW="400" marginTop={2} colorScheme="cyan">
                     <Text
                         fontSize="sm"
                         fontWeight="medium"
@@ -92,13 +91,6 @@ export const Login = ({ navigation }) => {
                     }}
                 >
                     <Box safeArea p="2" py="8" w="90%" maxW="290">
-                        <Box
-                            style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                                margin: 2,
-                            }}
-                        ></Box>
                         <Heading
                             size="lg"
                             fontWeight="600"
@@ -138,14 +130,33 @@ export const Login = ({ navigation }) => {
                                     onChangeText={(newText) =>
                                         setPassword(newText)
                                     }
-                                    type="password"
+                                    type={show ? "text" : "password"}
+                                    InputRightElement={
+                                        <Pressable
+                                            onPress={() => setShow(!show)}
+                                        >
+                                            <Icon
+                                                as={
+                                                    <MaterialIcons
+                                                        name={
+                                                            show
+                                                                ? "visibility"
+                                                                : "visibility-off"
+                                                        }
+                                                    />
+                                                }
+                                                mr="2"
+                                                color="muted.400"
+                                            />
+                                        </Pressable>
+                                    }
                                 />
                                 {status}
                                 <Link
                                     _text={{
                                         fontSize: "xs",
                                         fontWeight: "500",
-                                        color: "indigo.500",
+                                        color: "cyan.500",
                                     }}
                                     alignSelf="flex-end"
                                     mt="1"
@@ -177,12 +188,15 @@ export const Login = ({ navigation }) => {
                                     Não tem uma conta?{" "}
                                 </Text>
                                 <Link
+                                    colorScheme="cyan"
                                     _text={{
-                                        color: "indigo.500",
                                         fontWeight: "medium",
                                         fontSize: "sm",
+                                        color: "cyan.500",
                                     }}
-                                    href="#"
+                                    onPress={() =>
+                                        navigation.navigate("Cadastro")
+                                    }
                                 >
                                     Cadastre-se
                                 </Link>
