@@ -11,15 +11,21 @@ import {
     VStack,
     Alert,
 } from "native-base";
-
 import { api } from "../../servers/api";
+import { storeData, getData } from "../../servers/storage";
+import { useState,useEffect } from "react";
 
-import { useState } from "react";
-
-export const Login = () => {
+export const Login = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [status, setStatus] = useState(<></>);
+
+    useEffect(async() => {
+        const token = await getData("@token")
+        if (token!==undefined) {
+            navigation.navigate("Loja");
+        }
+      });
 
     const handleSubmit = async () => {
         if (email !== "" && password !== "") {
@@ -29,6 +35,8 @@ export const Login = () => {
             };
             try {
                 const token = await api.post("/user/login", data);
+                storeData("@token", token.data.token);
+                navigation.navigate("Loja");
             } catch (error) {
                 const response = error.response.data.data;
                 setStatus(
@@ -80,7 +88,7 @@ export const Login = () => {
                     style={{
                         padding: 5,
                         margin: 5,
-                        height: "100%",
+                        height: "80%",
                     }}
                 >
                     <Box safeArea p="2" py="8" w="90%" maxW="290">
@@ -118,15 +126,17 @@ export const Login = () => {
                                 <FormControl.Label>Email</FormControl.Label>
                                 <Input
                                     value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    onChangeText={(newText) =>
+                                        setEmail(newText)
+                                    }
                                 />
                             </FormControl>
                             <FormControl>
                                 <FormControl.Label>Senha</FormControl.Label>
                                 <Input
                                     value={password}
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
+                                    onChangeText={(newText) =>
+                                        setPassword(newText)
                                     }
                                     type="password"
                                 />
