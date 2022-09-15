@@ -1,4 +1,4 @@
-# [📱](https://emojiterra.com/pt/telefone/)Shopping Mobile
+# [📱](https://emojiterra.com/pt/telefone/)Store Mobile
 
 ### Sobre
 
