@@ -160,6 +160,9 @@ export const Login = ({ navigation }) => {
                                     }}
                                     alignSelf="flex-end"
                                     mt="1"
+                                    onPress={() =>
+                                        navigation.navigate("Recuperar")
+                                    }
                                 >
                                     Esqueceu a senha?
                                 </Link>

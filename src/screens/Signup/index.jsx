@@ -1,5 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import Native from "react-native";
+const {Alert: Alerta} = "react-native";
 import { cpf } from "cpf-cnpj-validator";
 import {
     Alert,
@@ -45,7 +45,7 @@ export const Signup = ({ navigation }) => {
             if (cpf.isValid(CPF)) {
                 try {
                     const response = await api.post("/user/signup", data);
-                    Native.Alert.alert(
+                    Alerta.alert(
                         "Sucesso",
                         "Registrado com sucesso",
                         [
