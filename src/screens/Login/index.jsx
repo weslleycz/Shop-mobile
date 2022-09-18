@@ -14,6 +14,7 @@ import {
     Text,
     VStack,
 } from "native-base";
+
 import { useEffect, useState } from "react";
 import { api } from "../../servers/api";
 import { getData, storeData } from "../../servers/storage";
@@ -80,7 +81,6 @@ export const Login = ({ navigation }) => {
                 style={{
                     height: "100%",
                 }}
-                safeArea
                 bg="primary.50"
             >
                 <Center
@@ -90,7 +90,7 @@ export const Login = ({ navigation }) => {
                         height: "80%",
                     }}
                 >
-                    <Box safeArea p="2" py="8" w="90%" maxW="290">
+                    <Box p="2" py="8" w="90%" maxW="290">
                         <Heading
                             size="lg"
                             fontWeight="600"

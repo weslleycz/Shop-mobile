@@ -1,18 +1,20 @@
-import { Box, Button, Text } from "native-base";
-import { deletData } from "../../servers/storage";
+import { Box, Center, Text } from "native-base";
 
 export const Store = () => {
     return (
         <>
-            <Box safeArea>
-                <Text>dddd</Text>
-                <Button
-                    onPress={() => {
-                        deletData("@token");
+            <Box
+                style={{
+                    height: "10%",
+                }}
+            >
+                <Center
+                    style={{
+                        height: "100%",
                     }}
                 >
-                    dddd
-                </Button>
+                    <Text>thfhhhhfgh</Text>
+                </Center>
             </Box>
         </>
     );

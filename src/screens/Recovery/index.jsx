@@ -67,7 +67,8 @@ export const Recovery = ({ navigation }) => {
                         height: "80%",
                     }}
                 >
-                    <Box safeArea p="2" py="8" w="90%" maxW="290">
+                    <Box p="2" py="8" w="90%" 
+                    maxW="290">
                         <VStack space={3} mt="5">
                             <VStack space={3} mt="5">
                                 <Heading
@@ -114,7 +115,7 @@ export const Recovery = ({ navigation }) => {
                                     colorScheme="primary"
                                     onPress={() => handleSubmit()}
                                 >
-                                    Entrar
+                                    Enviar
                                 </Button>
                                 <Button
                                     size="sm"

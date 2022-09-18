@@ -100,10 +100,10 @@ export const Signup = ({ navigation }) => {
                 style={{
                     height: "100%",
                 }}
-                safeArea
             >
                 <Center w="100%">
-                    <Box p="2" w="90%" maxW="290" py="8">
+                    <Box p="2" w="90%"
+                     maxW="290" py="8">
                         <Heading
                             size="lg"
                             color="coolGray.800"
