@@ -1,20 +1,23 @@
-import { Box, Center, Text } from "native-base";
+import { Box } from "native-base";
+import React from "react";
+import { Categories } from "../../components/Categories";
+import { Header } from "../../components/Header";
+import { Products } from "../../components/Products";
 
 export const Store = () => {
     return (
         <>
             <Box
+                bg={"primary.50"}
                 style={{
-                    height: "10%",
+                    height: "100%",
                 }}
             >
-                <Center
-                    style={{
-                        height: "100%",
-                    }}
-                >
-                    <Text>thfhhhhfgh</Text>
-                </Center>
+                <Header />
+                <Box>
+                    <Categories />
+                </Box>
+                <Products></Products>
             </Box>
         </>
     );
