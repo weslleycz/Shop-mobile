@@ -1,10 +1,10 @@
 import { Box } from "native-base";
-import React from "react";
 import { Categories } from "../../components/Categories";
 import { Header } from "../../components/Header";
 import { Products } from "../../components/Products";
 
 export const Store = () => {
+
     return (
         <>
             <Box
@@ -13,11 +13,11 @@ export const Store = () => {
                     height: "100%",
                 }}
             >
-                <Header />
+                <Header  />
                 <Box>
                     <Categories />
                 </Box>
-                <Products></Products>
+                <Products />
             </Box>
         </>
     );
