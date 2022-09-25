@@ -9,8 +9,6 @@ export const Card = ({ name, price, url, type }) => {
                 bg={"blueGray.50"}
                 rounded="2xl"
                 borderStyle={"solid"}
-                style={{
-                }}
             >
                 <Center>
                     <Box
@@ -37,17 +35,17 @@ export const Card = ({ name, price, url, type }) => {
                         }}
                     >
                         <Center>
-                        <Text
-                        fontWeight={"bold"}
-                        fontSize="xl">
-                            {name}
-                        </Text>
+                            <Text fontWeight={"bold"} fontSize="xl">
+                                {name}
+                            </Text>
                         </Center>
                     </Box>
                     <Box>
-                    <Center>
-                        <Text color={"gray.400"} fontStyle={"italic"}>{type}</Text>
-                    </Center>
+                        <Center>
+                            <Text color={"gray.400"} fontStyle={"italic"}>
+                                {type}
+                            </Text>
+                        </Center>
                     </Box>
                     <Box
                         style={{
@@ -55,16 +53,16 @@ export const Card = ({ name, price, url, type }) => {
                         }}
                     >
                         <Center>
-                        <Text
-                            fontWeight={"bold"}
-                            color={"primary.700"}
-                            fontSize="xl"
-                        >
-                            {(price / 100).toLocaleString("pt-BR", {
-                                style: "currency",
-                                currency: "BRL",
-                            })}
-                        </Text>
+                            <Text
+                                fontWeight={"bold"}
+                                color={"primary.700"}
+                                fontSize="xl"
+                            >
+                                {(price / 100).toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                })}
+                            </Text>
                         </Center>
                     </Box>
                 </Box>

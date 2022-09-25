@@ -1,10 +1,9 @@
-import { Box } from "native-base";
+import { Box,Button } from "native-base";
 import { Categories } from "../../components/Categories";
 import { Header } from "../../components/Header";
 import { Products } from "../../components/Products";
 
-export const Store = () => {
-
+export const Store = ({ navigation }) => {
     return (
         <>
             <Box
@@ -13,11 +12,11 @@ export const Store = () => {
                     height: "100%",
                 }}
             >
-                <Header  />
+                <Header />
                 <Box>
                     <Categories />
                 </Box>
-                <Products />
+                <Products navigation={navigation} />
             </Box>
         </>
     );

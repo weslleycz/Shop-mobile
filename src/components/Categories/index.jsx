@@ -36,10 +36,10 @@ export const Categories = () => {
                             🍎
                         </Text>
                     </Center>
-                    <Center size="20"  bg="primary.100" rounded="full">
+                    <Center size="20" bg="blueGray.50" rounded="full">
                         <Text fontSize="4xl">🥦</Text>
                     </Center>
-                    <Center size="20"  bg="primary.100" rounded="full">
+                    <Center size="20" bg="blueGray.50" rounded="full">
                         <Text
                             _text={{
                                 color: "warmGray.50",
@@ -50,7 +50,7 @@ export const Categories = () => {
                             🥔
                         </Text>
                     </Center>
-                    <Center size="20"  bg="primary.100" rounded="full">
+                    <Center size="20" bg="warmGray.50" rounded="full">
                         <Text
                             _text={{
                                 color: "warmGray.50",

@@ -6,6 +6,7 @@ import { Login } from "./src/screens/Login";
 import { Recovery } from "./src/screens/Recovery";
 import { Signup } from "./src/screens/Signup";
 import { Store } from "./src/screens/Store";
+import { Product } from "./src/screens/Product";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ export const Routes = () => {
                         <Stack.Screen name="Loja" component={Store} />
                         <Stack.Screen name="Cadastro" component={Signup} />
                         <Stack.Screen name="Recuperar" component={Recovery} />
+                        <Stack.Screen name="Produto" component={Product} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </Fragment>

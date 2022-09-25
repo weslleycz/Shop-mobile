@@ -1,10 +1,11 @@
 import { Box, Heading } from "native-base";
 import React, { useEffect, useState } from "react";
+import { TouchableOpacity } from "react-native";
 import { FlatGrid } from "react-native-super-grid";
 import { api } from "../../servers/api";
 import { Card } from "../Card";
 
-export const Products = () => {
+export const Products = ({ navigation }) => {
     const [product, setProduct] = useState([]);
     const getProducts = async () => {
         await api
@@ -37,13 +38,19 @@ export const Products = () => {
                 itemDimension={150}
                 data={product}
                 renderItem={({ item }) => (
-                    <Card
-                    key={item.id}
-                    price={item.price}
-                    url={item.url}
-                    name={item.name}
-                    type={item.type}
-                />
+                    <TouchableOpacity
+                        onPress={() =>
+                            navigation.navigate("Produto", { produto: item })
+                        }
+                    >
+                        <Card
+                            key={item.id}
+                            price={item.price}
+                            url={item.url}
+                            name={item.name}
+                            type={item.type}
+                        />
+                    </TouchableOpacity>
                 )}
             />
         </>
