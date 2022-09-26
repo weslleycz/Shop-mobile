@@ -5,11 +5,7 @@ import { Image } from "react-native";
 export const Card = ({ name, price, url, type }) => {
     return (
         <>
-            <Box
-                bg={"blueGray.50"}
-                rounded="2xl"
-                borderStyle={"solid"}
-            >
+            <Box bg={"blueGray.50"} rounded="2xl" borderStyle={"solid"}>
                 <Center>
                     <Box
                         style={{
@@ -58,10 +54,11 @@ export const Card = ({ name, price, url, type }) => {
                                 color={"primary.700"}
                                 fontSize="xl"
                             >
-                                {(price / 100).toLocaleString("pt-BR", {
-                                    style: "currency",
-                                    currency: "BRL",
-                                })}
+                                {`R$ ${
+                                    price.toString().length <= 2
+                                        ? `0,${price}`
+                                        : `${price / 100},00`
+                                }`}
                             </Text>
                         </Center>
                     </Box>

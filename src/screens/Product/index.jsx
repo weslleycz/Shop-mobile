@@ -1,4 +1,4 @@
-import { Box, Center, HStack, ScrollView, Text } from "native-base";
+import { Box, Button, Center, HStack, ScrollView, Text } from "native-base";
 import { useState } from "react";
 import { Image } from "react-native";
 import NumericInput from "react-native-numeric-input";
@@ -44,37 +44,70 @@ export const Product = ({ route, navigation }) => {
                 <Center>
                     <Box
                         style={{
-                            width: "80%",
+                            width: "90%",
                         }}
                     >
-                        <HStack justifyContent={"space-between"}>
-                            <Text fontWeight={"bold"} fontSize="3xl">
-                                {route.params.produto.name}
-                            </Text>
+                        <Text fontWeight={"bold"} fontSize="3xl">
+                            {route.params.produto.name}
+                        </Text>
+                    </Box>
+                </Center>
+
+                <Box
+                    style={{
+                        width: "90%",
+                        paddingLeft: "5%",
+                    }}
+                >
+                    <Text
+                        fontWeight={"bold"}
+                        color={"blueGray.600"}
+                        fontSize="sm"
+                    >
+                        {route.params.produto.description}
+                    </Text>
+                </Box>
+                <Box
+                    style={{
+                        paddingLeft: "5%",
+                    }}
+                >
+                    <Text
+                        fontWeight={"bold"}
+                        color={"primary.700"}
+                        fontSize="3xl"
+                    >
+                        {`R$ ${
+                            route.params.produto.price.toString().length <= 2
+                                ? `0,${route.params.produto.price}`
+                                : `${route.params.produto.price / 100},00`
+                        }`}
+                    </Text>
+                </Box>
+                <Center>
+                    <Box
+                        flex={1}
+                        safeAreaTop
+                        alignSelf="center"
+                        style={{
+                            width: "90%",
+                        }}
+                    >
+                        <HStack safeAreaBottom justifyContent={"space-between"}>
+                            <Button size={"lg"}>Adicionar ao carrinho</Button>
                             <NumericInput
                                 type="up-down"
                                 iconStyle={{ color: "#4ac793" }}
                                 maxValue={route.params.produto.quantity}
-                                valueType='real'
-                                rounded 
+                                valueType="real"
+                                rounded
                                 minValue={1}
                                 onChange={(value) => setQuantity(value)}
                             />
                         </HStack>
                     </Box>
                 </Center>
-                <Text fontWeight={"bold"} fontSize="2xl">
-                    {(route.params.produto.price / 100).toLocaleString(
-                        "pt-BR",
-                        {
-                            style: "currency",
-                            currency: "BRL",
-                        }
-                    )}
-                </Text>
             </ScrollView>
         </>
     );
 };
-
-//route.params.produto.id
