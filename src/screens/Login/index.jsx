@@ -14,7 +14,7 @@ import {
     Text,
     VStack,
 } from "native-base";
-
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { api } from "../../servers/api";
 import { getData, storeData } from "../../servers/storage";
@@ -40,7 +40,8 @@ export const Login = ({ navigation }) => {
             };
             try {
                 const token = await api.post("/user/login", data);
-                storeData("@token", token.data.token);
+                storeData("@token",token.data.token);
+                storeData("@expire",moment().add(24, "hours").format());
                 navigation.navigate("Loja");
             } catch (error) {
                 const response = error.response.data.data;
