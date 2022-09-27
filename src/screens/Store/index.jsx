@@ -1,12 +1,13 @@
 import moment from "moment";
 import { Box } from "native-base";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { Categories } from "../../components/Categories";
 import { Header } from "../../components/Header";
 import { Products } from "../../components/Products";
 import { deletData, getData } from "../../servers/storage";
 
 export const Store = ({ navigation }) => {
+    const [product, setProduct] = useState([]);
     useEffect(async () => {
         const expire = await getData("@expire");
         const token = await getData("@token");
@@ -28,11 +29,16 @@ export const Store = ({ navigation }) => {
                     height: "100%",
                 }}
             >
-                <Header />
+                <Header
+                product={product} 
+                setProduct={setProduct}
+                 />
                 <Box>
                     <Categories />
                 </Box>
-                <Products navigation={navigation} />
+                <Products product={product} 
+                setProduct={setProduct}
+                navigation={navigation} />
             </Box>
         </>
     );

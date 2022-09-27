@@ -1,5 +1,4 @@
 import { Box, Center, Text } from "native-base";
-import React from "react";
 import { Image } from "react-native";
 
 export const Card = ({ name, price, url, type }) => {

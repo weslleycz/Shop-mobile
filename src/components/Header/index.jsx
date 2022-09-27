@@ -1,10 +1,13 @@
 import { Box, HStack, Input, Text, View } from "native-base";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getData } from "../../servers/storage";
 import { Keyboard } from "react-native";
 import Icon from "react-native-vector-icons/Entypo";
+import { api } from "../../servers/api";
 
-export const Header = () => {
+export const Header = ({ setProduct }) => {
     const [sizeHeader, setSizeHeader] = useState("25%");
+    const [search, setSearch] = useState("");
 
     const keyboardShowListener = Keyboard.addListener("keyboardDidShow", () => {
         setSizeHeader("36%");
@@ -12,6 +15,26 @@ export const Header = () => {
     const keyboardHideListener = Keyboard.addListener("keyboardDidHide", () => {
         setSizeHeader("25%");
     });
+
+    useEffect(async () => {
+        if (search === "") {
+            const data = await getData("@products");
+            setProduct(JSON.parse(data))
+        } else {
+            getSearch();
+        }
+    }, [search]);
+
+    const getSearch = async () => {
+        await api
+            .get(`/product/search/${search}`)
+            .then((res) => {
+                setProduct(res.data.data);
+            })
+            .catch((error) => {
+                alert("error 400");
+            });
+    };
 
     return (
         <>
@@ -28,20 +51,20 @@ export const Header = () => {
                 >
                     <HStack justifyContent={"space-between"}>
                         <Box>
-                        <HStack space={2}>
-                        <Text color={"white"} fontSize="sm">
-                            Minha localização
-                        </Text>
-                        <Icon
-                            name="chevron-small-down"
-                            size={20}
-                            color="#ffff"
-                        />
-                        </HStack>
+                            <HStack space={2}>
+                                <Text color={"white"} fontSize="sm">
+                                    Minha localização
+                                </Text>
+                                <Icon
+                                    name="chevron-small-down"
+                                    size={20}
+                                    color="#ffff"
+                                />
+                            </HStack>
                         </Box>
                         <Icon
                             style={{
-                                padding:"1%"
+                                padding: "1%",
                             }}
                             name="shopping-cart"
                             size={20}
@@ -54,7 +77,9 @@ export const Header = () => {
                         }}
                     >
                         <Input
+                            value={search}
                             borderRadius={"xl"}
+                            onChangeText={(newText) => setSearch(newText)}
                             InputLeftElement={
                                 <Icon
                                     name="magnifying-glass"

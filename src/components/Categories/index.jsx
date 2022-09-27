@@ -19,7 +19,7 @@ export const Categories = () => {
                 >
                     <Center
                         size="20"
-                        bg="primary.100"
+                        bg="warmGray.50"
                         _text={{
                             color: "warmGray.50",
                             fontWeight: "bold",

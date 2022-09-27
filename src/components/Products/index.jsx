@@ -7,8 +7,7 @@ import { api } from "../../servers/api";
 import { storeData,getData } from "../../servers/storage";
 import { Card } from "../Card";
 
-export const Products = ({ navigation }) => {
-    const [product, setProduct] = useState([]);
+export const Products = ({ navigation,product,setProduct }) => {
     const getProducts = async () => {
         if (await (await Network.getNetworkStateAsync()).isConnected) {
             await api
@@ -16,8 +15,7 @@ export const Products = ({ navigation }) => {
                 .then((res) => {
                     setProduct(res.data.data);
                      productsOff(res.data.data)
-                })
-                .catch((error) => {
+                }).catch((error) => {
                     alert("error 400");
                 });
         } else {
