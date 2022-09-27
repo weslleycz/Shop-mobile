@@ -1,10 +1,19 @@
+import * as Network from "expo-network";
 import { Box, Button, Center, HStack, ScrollView, Text } from "native-base";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image } from "react-native";
 import NumericInput from "react-native-numeric-input";
 import Icon from "react-native-vector-icons/AntDesign";
 export const Product = ({ route, navigation }) => {
     const [quantity, setQuantity] = useState(1);
+    const [online, setOnline] = useState(true);
+    useEffect(async () => {
+        (await (
+            await Network.getNetworkStateAsync()
+        ).isConnected)
+            ? setOnline(true)
+            : setOnline(false);
+    }, []);
     return (
         <>
             <ScrollView
@@ -84,29 +93,38 @@ export const Product = ({ route, navigation }) => {
                         }`}
                     </Text>
                 </Box>
-                <Center>
-                    <Box
-                        flex={1}
-                        safeAreaTop
-                        alignSelf="center"
-                        style={{
-                            width: "90%",
-                        }}
-                    >
-                        <HStack safeAreaBottom justifyContent={"space-between"}>
-                            <Button size={"lg"}>Adicionar ao carrinho</Button>
-                            <NumericInput
-                                type="up-down"
-                                iconStyle={{ color: "#4ac793" }}
-                                maxValue={route.params.produto.quantity}
-                                valueType="real"
-                                rounded
-                                minValue={1}
-                                onChange={(value) => setQuantity(value)}
-                            />
-                        </HStack>
-                    </Box>
-                </Center>
+                {online ? (
+                    <Center>
+                        <Box
+                            flex={1}
+                            safeAreaTop
+                            alignSelf="center"
+                            style={{
+                                width: "90%",
+                            }}
+                        >
+                            <HStack
+                                safeAreaBottom
+                                justifyContent={"space-between"}
+                            >
+                                <Button size={"lg"}>
+                                    Adicionar ao carrinho
+                                </Button>
+                                <NumericInput
+                                    type="up-down"
+                                    iconStyle={{ color: "#4ac793" }}
+                                    maxValue={route.params.produto.quantity}
+                                    valueType="real"
+                                    rounded
+                                    minValue={1}
+                                    onChange={(value) => setQuantity(value)}
+                                />
+                            </HStack>
+                        </Box>
+                    </Center>
+                ) : (
+                    ""
+                )}
             </ScrollView>
         </>
     );

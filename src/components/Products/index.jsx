@@ -1,22 +1,37 @@
+import * as Network from "expo-network";
 import { Box, Heading } from "native-base";
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { FlatGrid } from "react-native-super-grid";
 import { api } from "../../servers/api";
+import { storeData,getData } from "../../servers/storage";
 import { Card } from "../Card";
 
 export const Products = ({ navigation }) => {
     const [product, setProduct] = useState([]);
     const getProducts = async () => {
-        await api
-            .get("/product/list")
-            .then((res) => {
-                setProduct(res.data.data);
-            })
-            .catch((error) => {
-                alert("error 400");
-            });
+        if (await (await Network.getNetworkStateAsync()).isConnected) {
+            await api
+                .get("/product/list")
+                .then((res) => {
+                    setProduct(res.data.data);
+                     productsOff(res.data.data)
+                })
+                .catch((error) => {
+                    alert("error 400");
+                });
+        } else {
+           const data = await getData("@products");
+           setProduct(JSON.parse(data))
+        }
     };
+
+    const productsOff = async (product) => {
+        await storeData(
+            "@products",
+            JSON.stringify(product)
+        );
+    }
 
     useEffect(() => {
         getProducts();
