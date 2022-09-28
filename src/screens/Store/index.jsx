@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Box } from "native-base";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { Categories } from "../../components/Categories";
 import { Header } from "../../components/Header";
 import { Products } from "../../components/Products";
@@ -29,16 +29,15 @@ export const Store = ({ navigation }) => {
                     height: "100%",
                 }}
             >
-                <Header
-                product={product} 
-                setProduct={setProduct}
-                 />
+                <Header product={product} setProduct={setProduct} />
                 <Box>
-                    <Categories />
+                    <Categories setProduct={setProduct} />
                 </Box>
-                <Products product={product} 
-                setProduct={setProduct}
-                navigation={navigation} />
+                <Products
+                    product={product}
+                    setProduct={setProduct}
+                    navigation={navigation}
+                />
             </Box>
         </>
     );
